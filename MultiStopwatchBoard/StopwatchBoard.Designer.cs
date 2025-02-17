@@ -1,6 +1,6 @@
 ﻿namespace MultiStopwatchBoard
 {
-    partial class Form1
+    partial class StopwatchBoard
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            AddStopwatchBtn = new Button();
+            SuspendLayout();
+            // 
+            // AddStopwatchBtn
+            // 
+            AddStopwatchBtn.Location = new Point(581, 56);
+            AddStopwatchBtn.Name = "AddStopwatchBtn";
+            AddStopwatchBtn.Size = new Size(174, 29);
+            AddStopwatchBtn.TabIndex = 0;
+            AddStopwatchBtn.Text = "Add Stopwatch";
+            AddStopwatchBtn.UseVisualStyleBackColor = true;
+            AddStopwatchBtn.Click += GenerateStopwatch;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(AddStopwatchBtn);
+            Name = "StopwatchBoard";
+            Text = "Stopwatch Board";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button AddStopwatchBtn;
     }
 }
