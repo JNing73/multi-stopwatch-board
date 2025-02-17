@@ -62,7 +62,10 @@ namespace MultiStopwatchBoard
             {
                 _timeDisplay.Text = _elapsedTime.ToString();
                 await Task.Delay(1000);
-                _elapsedTime += 1; // Add one second
+                if (_isRunning)
+                {
+                    _elapsedTime += 1; // Add one second
+                }
             }
             return;
         }
