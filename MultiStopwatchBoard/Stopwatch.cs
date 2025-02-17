@@ -46,9 +46,9 @@ namespace MultiStopwatchBoard
             _oneActiveInstanceOfRunStopwatch = false;
 
             // Add the stopwatch elements to the form
-            board.Controls.Add(_timeDisplay);
-            board.Controls.Add(_toggleBtn);
-            board.Controls.Add(_resetBtn);
+            _board.Controls.Add(_timeDisplay);
+            _board.Controls.Add(_toggleBtn);
+            _board.Controls.Add(_resetBtn);
         }
 
         private async void ToggleStopwatch(object? sender, EventArgs e)
