@@ -8,32 +8,32 @@ namespace MultiStopwatchBoard
 {
     public class Stopwatch
     {
-        private Form form;
-        private int elapsedTime;
-        private Label timeDisplay;
-        private Button toggleBtn;
+        private readonly StopwatchBoard _board;
+        private int _elapsedTime;
+        private Label _timeDisplay;
+        private Button _toggleBtn;
 
-        public Stopwatch(StopwatchBoard parentForm)
+        public Stopwatch(StopwatchBoard board)
         {
-            this.form = parentForm;
+            _board = board;
 
-            elapsedTime = 0;
+            _elapsedTime = 0;
 
             // Stopwatch display 
-            timeDisplay = new Label();
-            timeDisplay.Text = "Ready";
-            timeDisplay.Location = new Point(10, parentForm.GetYPos());
+            _timeDisplay = new Label();
+            _timeDisplay.Text = "Ready";
+            _timeDisplay.Location = new Point(10, _board.GetYPos());
 
             // Stopwatch operation button
-            toggleBtn = new Button();
-            toggleBtn.Text = "Start/Stop";
-            toggleBtn.Width = 120;
-            toggleBtn.Height = 30;
-            toggleBtn.Location = new Point(15 + timeDisplay.Width, parentForm.GetYPos());
+            _toggleBtn = new Button();
+            _toggleBtn.Text = "Start/Stop";
+            _toggleBtn.Width = 120;
+            _toggleBtn.Height = 30;
+            _toggleBtn.Location = new Point(15 + _timeDisplay.Width, _board.GetYPos());
 
             // Add the stopwatch elements to the form
-            form.Controls.Add(timeDisplay);
-            form.Controls.Add(toggleBtn);
+            board.Controls.Add(_timeDisplay);
+            board.Controls.Add(_toggleBtn);
         }
     }
 }
