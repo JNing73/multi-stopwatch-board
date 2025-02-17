@@ -13,6 +13,7 @@ namespace MultiStopwatchBoard
         private Label _timeDisplay;
         private Button _toggleBtn;
         private bool _isRunning;
+        private bool _oneActiveInstanceOfRunStopwatch;
 
         public Stopwatch(StopwatchBoard board)
         {
@@ -33,6 +34,8 @@ namespace MultiStopwatchBoard
             _toggleBtn.Height = 30;
             _toggleBtn.Location = new Point(15 + _timeDisplay.Width, _board.GetYPos());
             _toggleBtn.Click += ToggleStopwatch;
+
+            _oneActiveInstanceOfRunStopwatch = false;
 
             // Add the stopwatch elements to the form
             board.Controls.Add(_timeDisplay);
@@ -58,8 +61,13 @@ namespace MultiStopwatchBoard
 
         private async Task RunStopwatch()
         {
+            if (_oneActiveInstanceOfRunStopwatch)
+            {
+                return;
+            }
             while (_isRunning)
             {
+                _oneActiveInstanceOfRunStopwatch = true;
                 _timeDisplay.Text = _elapsedTime.ToString();
                 await Task.Delay(1000);
                 if (_isRunning)
@@ -67,6 +75,7 @@ namespace MultiStopwatchBoard
                     _elapsedTime += 1; // Add one second
                 }
             }
+            _oneActiveInstanceOfRunStopwatch = false; 
             return;
         }
     }
