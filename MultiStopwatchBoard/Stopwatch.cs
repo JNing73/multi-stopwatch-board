@@ -42,11 +42,18 @@ namespace MultiStopwatchBoard
         private async void ToggleStopwatch(object? sender, EventArgs e)
         {
             _isRunning = !_isRunning;
-
+            
+            UpdateToggleBtnText();
             if (_isRunning)
             {
                 await RunStopwatch();
             }
+        }
+
+        private void UpdateToggleBtnText()
+        {
+            string toggleText = _isRunning ? "Pause" : "Continue";
+            _toggleBtn.Text = toggleText;
         }
 
         private async Task RunStopwatch()
@@ -56,7 +63,6 @@ namespace MultiStopwatchBoard
                 _timeDisplay.Text = _elapsedTime.ToString();
                 await Task.Delay(1000);
                 _elapsedTime += 1; // Add one second
-
             }
             return;
         }
