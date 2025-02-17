@@ -42,6 +42,7 @@ namespace MultiStopwatchBoard
             _resetBtn.Width = 120;
             _resetBtn.Height = 30;
             _resetBtn.Location = new Point(15 + _timeDisplay.Width + 10 + _toggleBtn.Width, _board.GetYPos());
+            _resetBtn.Click += ResetStopwatch;
 
             _oneActiveInstanceOfRunStopwatch = false;
 
@@ -49,6 +50,15 @@ namespace MultiStopwatchBoard
             _board.Controls.Add(_timeDisplay);
             _board.Controls.Add(_toggleBtn);
             _board.Controls.Add(_resetBtn);
+        }
+
+        private void ResetStopwatch(object? sender, EventArgs e)
+        {
+            _isRunning = false;
+
+            _elapsedTime = 0;
+            _timeDisplay.Text = "Ready";
+            _toggleBtn.Text = "Start/Stop";
         }
 
         private async void ToggleStopwatch(object? sender, EventArgs e)
