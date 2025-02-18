@@ -3,6 +3,7 @@ namespace MultiStopwatchBoard
     public partial class StopwatchBoard : Form
     {
         private int currentYPosition = 10; // y-pos for where stopwatch should appear
+        private List<Stopwatch> _stopwatchesOnBoard = [];
 
         public StopwatchBoard()
         {
@@ -23,7 +24,7 @@ namespace MultiStopwatchBoard
         // Add a new stopwatch to the board
         private void GenerateStopwatch(object sender, EventArgs e)
         {
-            Stopwatch stopwatch = new(this);
+            _stopwatchesOnBoard.Add(new Stopwatch(this));
             UpdateYPos();
         }
     }
