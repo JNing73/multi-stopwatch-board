@@ -70,6 +70,8 @@ namespace MultiStopwatchBoard
             _board.Controls.Remove(_toggleBtn);
             _board.Controls.Remove(_resetBtn);
             _board.Controls.Remove(_deleteBtn);
+
+            _board.RemoveStopwatch(this);
         }
 
         private void ResetStopwatch(object? sender, EventArgs e)
@@ -118,6 +120,14 @@ namespace MultiStopwatchBoard
             }
             _oneActiveInstanceOfRunStopwatch = false;
             return;
+        }
+
+        internal void Reposition(int verticalAdjustment)
+        {
+            _timeDisplay.Top -= verticalAdjustment;
+            _toggleBtn.Top -= verticalAdjustment;
+            _resetBtn.Top -= verticalAdjustment;
+            _deleteBtn.Top -= verticalAdjustment;
         }
     }
 }
