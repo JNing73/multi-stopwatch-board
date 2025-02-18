@@ -13,6 +13,7 @@ namespace MultiStopwatchBoard
         private Label _timeDisplay;
         private Button _toggleBtn;
         private Button _resetBtn;
+        private Button _deleteBtn;
         private bool _isRunning;
         private bool _oneActiveInstanceOfRunStopwatch;
 
@@ -44,12 +45,20 @@ namespace MultiStopwatchBoard
             _resetBtn.Location = new Point(15 + _timeDisplay.Width + 10 + _toggleBtn.Width, _board.GetYPos());
             _resetBtn.Click += ResetStopwatch;
 
+            // Delete button
+            _deleteBtn = new Button();
+            _deleteBtn.Text = "Remove";
+            _deleteBtn.Width = 120;
+            _deleteBtn.Height = 30;
+            _deleteBtn.Location = new Point(15 + _timeDisplay.Width + 10 + _toggleBtn.Width + 10 + _resetBtn.Width, _board.GetYPos());
+
             _oneActiveInstanceOfRunStopwatch = false;
 
             // Add the stopwatch elements to the form
             _board.Controls.Add(_timeDisplay);
             _board.Controls.Add(_toggleBtn);
             _board.Controls.Add(_resetBtn);
+            _board.Controls.Add(_deleteBtn);
         }
 
         private void ResetStopwatch(object? sender, EventArgs e)
