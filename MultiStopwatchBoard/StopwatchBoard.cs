@@ -27,5 +27,10 @@ namespace MultiStopwatchBoard
             _stopwatchesOnBoard.Add(new Stopwatch(this));
             UpdateYPos();
         }
+
+        internal void RemoveStopwatch(Stopwatch stopwatch)
+        {
+            _stopwatchesOnBoard.Remove(stopwatch);
+        }
     }
 }

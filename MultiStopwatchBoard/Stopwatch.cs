@@ -70,6 +70,8 @@ namespace MultiStopwatchBoard
             _board.Controls.Remove(_toggleBtn);
             _board.Controls.Remove(_resetBtn);
             _board.Controls.Remove(_deleteBtn);
+
+            _board.RemoveStopwatch(this);
         }
 
         private void ResetStopwatch(object? sender, EventArgs e)
