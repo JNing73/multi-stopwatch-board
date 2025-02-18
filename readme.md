@@ -11,6 +11,7 @@ On removal the stopwatches follow an animation sequence to re-order themselves.
 
 ## How to run
 - Run on Visual Studio on a compatible Windows-based computer
+- Open the MultiStopwatchBoard.sln solution file
 
 ## Coding Concepts Demonstrated
 - Developing with Windows Forms Applications
