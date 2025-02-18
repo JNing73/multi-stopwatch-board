@@ -124,7 +124,7 @@ namespace MultiStopwatchBoard
 
         internal async void Reposition(int verticalAdjustment)
         {
-            int increment = 1;
+            int increment = 2;
 
             for (int totalAdjustment = 0; totalAdjustment < verticalAdjustment; totalAdjustment += increment)
             {
