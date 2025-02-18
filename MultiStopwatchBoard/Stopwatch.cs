@@ -122,9 +122,12 @@ namespace MultiStopwatchBoard
             return;
         }
 
-        internal void Reposition()
+        internal void Reposition(int verticalAdjustment)
         {
-            throw new NotImplementedException();
+            _timeDisplay.Top -= verticalAdjustment;
+            _toggleBtn.Top -= verticalAdjustment;
+            _resetBtn.Top -= verticalAdjustment;
+            _deleteBtn.Top -= verticalAdjustment;
         }
     }
 }

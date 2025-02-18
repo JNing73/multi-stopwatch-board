@@ -30,11 +30,13 @@ namespace MultiStopwatchBoard
 
         internal void RemoveStopwatch(Stopwatch stopwatch)
         {
+            int stopwatchPos = _stopwatchesOnBoard.IndexOf(stopwatch);
             _stopwatchesOnBoard.Remove(stopwatch);
 
-            foreach (Stopwatch presentStopwatch in _stopwatchesOnBoard)
+            for (int i = stopwatchPos; i < _stopwatchesOnBoard.Count; i++)
             {
-                presentStopwatch.Reposition(50);
+                Stopwatch sw = _stopwatchesOnBoard[i];
+                sw.Reposition(50);
             }
         }
     }
