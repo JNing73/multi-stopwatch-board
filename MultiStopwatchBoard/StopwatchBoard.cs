@@ -3,6 +3,7 @@ namespace MultiStopwatchBoard
     public partial class StopwatchBoard : Form
     {
         private int _currentYPosition = 10; // y-pos for where stopwatch should appear
+        private int _verticalAdjustmentFactor = 50;
         private List<Stopwatch> _stopwatchesOnBoard = [];
 
         public StopwatchBoard()
@@ -18,7 +19,7 @@ namespace MultiStopwatchBoard
         // Lower the position for the next stopwatch
         private void UpdateYPos()
         {
-            _currentYPosition += 50;
+            _currentYPosition += _verticalAdjustmentFactor;
         }
 
         // Add a new stopwatch to the board
@@ -36,7 +37,7 @@ namespace MultiStopwatchBoard
             for (int i = stopwatchPos; i < _stopwatchesOnBoard.Count; i++)
             {
                 Stopwatch sw = _stopwatchesOnBoard[i];
-                sw.Reposition(50);
+                sw.Reposition(_verticalAdjustmentFactor);
             }
 
             RepositionYPos();
@@ -44,7 +45,7 @@ namespace MultiStopwatchBoard
 
         private void RepositionYPos()
         {
-            _currentYPosition -= 50;
+            _currentYPosition -= _verticalAdjustmentFactor;
         }
     }
 }
