@@ -17,6 +17,8 @@ namespace MultiStopwatchBoard
         private bool _isRunning;
         private bool _oneActiveInstanceOfRunStopwatch;
 
+        private List<System.Windows.Forms.Control> _frontEndElements = [];
+
         public Stopwatch(StopwatchBoard board)
         {
             _board = board;
@@ -55,21 +57,25 @@ namespace MultiStopwatchBoard
 
             _oneActiveInstanceOfRunStopwatch = false;
 
-            // Add the stopwatch elements to the form
-            _board.Controls.Add(_timeDisplay);
-            _board.Controls.Add(_toggleBtn);
-            _board.Controls.Add(_resetBtn);
-            _board.Controls.Add(_deleteBtn);
+            _frontEndElements.Add(_timeDisplay);
+            _frontEndElements.Add(_toggleBtn);
+            _frontEndElements.Add(_resetBtn);
+            _frontEndElements.Add(_deleteBtn);
+
+            foreach (var frontEndElement in _frontEndElements)
+            {
+                _board.Controls.Add(frontEndElement);
+            }
         }
 
         private void DeleteStopwatch(object? sender, EventArgs e)
         {
             _isRunning = false;
 
-            _board.Controls.Remove(_timeDisplay);
-            _board.Controls.Remove(_toggleBtn);
-            _board.Controls.Remove(_resetBtn);
-            _board.Controls.Remove(_deleteBtn);
+            foreach (var frontEndElement in _frontEndElements)
+            {
+                _board.Controls.Remove(frontEndElement);
+            }
 
             _board.RemoveStopwatch(this);
         }
@@ -122,12 +128,19 @@ namespace MultiStopwatchBoard
             return;
         }
 
-        internal void Reposition(int verticalAdjustment)
+        internal async void Reposition(int verticalAdjustment)
         {
-            _timeDisplay.Top -= verticalAdjustment;
-            _toggleBtn.Top -= verticalAdjustment;
-            _resetBtn.Top -= verticalAdjustment;
-            _deleteBtn.Top -= verticalAdjustment;
+            int increment = 2;
+
+            for (int totalAdjustment = 0; totalAdjustment < verticalAdjustment; totalAdjustment += increment)
+            {
+                foreach (var frontEndElement in _frontEndElements)
+                {
+                    frontEndElement.Top -= increment;
+                }
+
+                await Task.Delay(1);
+            }
         }
     }
 }
