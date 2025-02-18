@@ -17,6 +17,8 @@ namespace MultiStopwatchBoard
         private bool _isRunning;
         private bool _oneActiveInstanceOfRunStopwatch;
 
+        private List<System.Windows.Forms.Control> _frontEndElements = [];
+
         public Stopwatch(StopwatchBoard board)
         {
             _board = board;
@@ -55,21 +57,25 @@ namespace MultiStopwatchBoard
 
             _oneActiveInstanceOfRunStopwatch = false;
 
-            // Add the stopwatch elements to the form
-            _board.Controls.Add(_timeDisplay);
-            _board.Controls.Add(_toggleBtn);
-            _board.Controls.Add(_resetBtn);
-            _board.Controls.Add(_deleteBtn);
+            _frontEndElements.Add(_timeDisplay);
+            _frontEndElements.Add(_toggleBtn);
+            _frontEndElements.Add(_resetBtn);
+            _frontEndElements.Add(_deleteBtn);
+
+            foreach (var frontEndElement in _frontEndElements)
+            {
+                _board.Controls.Add(frontEndElement);
+            }
         }
 
         private void DeleteStopwatch(object? sender, EventArgs e)
         {
             _isRunning = false;
 
-            _board.Controls.Remove(_timeDisplay);
-            _board.Controls.Remove(_toggleBtn);
-            _board.Controls.Remove(_resetBtn);
-            _board.Controls.Remove(_deleteBtn);
+            foreach (var frontEndElement in _frontEndElements)
+            {
+                _board.Controls.Remove(frontEndElement);
+            }
 
             _board.RemoveStopwatch(this);
         }
@@ -128,11 +134,11 @@ namespace MultiStopwatchBoard
 
             for (int totalAdjustment = 0; totalAdjustment < verticalAdjustment; totalAdjustment += increment)
             {
-                _timeDisplay.Top -= increment;
-                _toggleBtn.Top -= increment;
-                _resetBtn.Top -= increment;
-                _deleteBtn.Top -= increment;
-                
+                foreach (var frontEndElement in _frontEndElements)
+                {
+                    frontEndElement.Top -= increment;
+                }
+
                 await Task.Delay(1);
             }
         }
