@@ -122,12 +122,19 @@ namespace MultiStopwatchBoard
             return;
         }
 
-        internal void Reposition(int verticalAdjustment)
+        internal async void Reposition(int verticalAdjustment)
         {
-            _timeDisplay.Top -= verticalAdjustment;
-            _toggleBtn.Top -= verticalAdjustment;
-            _resetBtn.Top -= verticalAdjustment;
-            _deleteBtn.Top -= verticalAdjustment;
+            int increment = 1;
+
+            for (int totalAdjustment = 0; totalAdjustment < verticalAdjustment; totalAdjustment += increment)
+            {
+                _timeDisplay.Top -= increment;
+                _toggleBtn.Top -= increment;
+                _resetBtn.Top -= increment;
+                _deleteBtn.Top -= increment;
+                
+                await Task.Delay(1);
+            }
         }
     }
 }
