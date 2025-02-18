@@ -121,5 +121,10 @@ namespace MultiStopwatchBoard
             _oneActiveInstanceOfRunStopwatch = false;
             return;
         }
+
+        internal void Reposition()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

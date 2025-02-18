@@ -31,6 +31,11 @@ namespace MultiStopwatchBoard
         internal void RemoveStopwatch(Stopwatch stopwatch)
         {
             _stopwatchesOnBoard.Remove(stopwatch);
+
+            foreach (Stopwatch presentStopwatch in _stopwatchesOnBoard)
+            {
+                presentStopwatch.Reposition(50);
+            }
         }
     }
 }
