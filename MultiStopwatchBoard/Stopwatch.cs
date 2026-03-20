@@ -9,13 +9,13 @@ namespace MultiStopwatchBoard
     public class Stopwatch
     {
         private readonly StopwatchBoard _board;
-        private int _elapsedTime;
         private Label _timeDisplay;
         private Button _toggleBtn;
         private Button _resetBtn;
         private Button _deleteBtn;
         private bool _isRunning;
         private bool _oneActiveInstanceOfRunStopwatch;
+        private System.Diagnostics.Stopwatch _stopwatch = new();
 
         private List<System.Windows.Forms.Control> _frontEndElements = [];
 
@@ -23,7 +23,6 @@ namespace MultiStopwatchBoard
         {
             _board = board;
 
-            _elapsedTime = 0;
             _isRunning = false;
 
             // Stopwatch display 
@@ -84,7 +83,7 @@ namespace MultiStopwatchBoard
         {
             _isRunning = false;
 
-            _elapsedTime = 0;
+            _stopwatch.Reset();
             _timeDisplay.Text = "Ready";
             _toggleBtn.Text = "Start/Stop";
         }
@@ -92,11 +91,16 @@ namespace MultiStopwatchBoard
         private async void ToggleStopwatch(object? sender, EventArgs e)
         {
             _isRunning = !_isRunning;
-            
+
             UpdateToggleBtnText();
             if (_isRunning)
             {
+                _stopwatch.Start();
                 await RunStopwatch();
+            }
+            else
+            {
+                _stopwatch.Stop();
             }
         }
 
@@ -114,18 +118,13 @@ namespace MultiStopwatchBoard
             {
                 return;
             }
+            _oneActiveInstanceOfRunStopwatch = true;
             while (_isRunning)
             {
-                _oneActiveInstanceOfRunStopwatch = true;
-                _timeDisplay.Text = _elapsedTime.ToString();
-                await Task.Delay(1000);
-                if (_isRunning)
-                {
-                    _elapsedTime += 1; // Add one second
-                }
+                _timeDisplay.Text = _stopwatch.Elapsed.ToString(@"hh\:mm\:ss");
+                await Task.Delay(100);
             }
             _oneActiveInstanceOfRunStopwatch = false;
-            return;
         }
 
         internal async void Reposition(int verticalAdjustment)
